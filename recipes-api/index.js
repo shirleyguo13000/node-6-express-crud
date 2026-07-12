@@ -30,12 +30,17 @@ async function getAllRecipes() {
   return parsedData;
 }
 
+// **CLEAN AND COMMENT CODE**
 // 2. getOneRecipe(index)
-
+// async function declared with index as its parameter
 async function getOneRecipe(index) {
+  // waiting for the data to be read in its path and returned as JSON strings
   const data = await fs.readFile("recipes-data.json", "utf8");
+  // parses the data from JSON into javascript
   const parsedData = JSON.parse(data);
+  // declaring variable recipe for dynamic data filtering via index parameter
   const recipe = parsedData[index];
+  // return whatever data is requested via index
   return recipe;
 }
 
@@ -66,10 +71,15 @@ app.get("/get-all-recipes", async (req, res) => {
   res.json(recipes);
 });
 
+// ** CLEAN AND COMMENT CODE**
 // 2. GET /get-one-recipe/:index
+// sending GET request to server for get-one-recipe
 app.get("/get-one-recipe/:index", async (req, res) => {
+// accesses the index via requested parameters delcared in helper function
   const index = Number(req.params.index);
+//wait for the helper function to be called 
   const recipe = await getOneRecipe(index);
+  // sends the object back as JSON
   res.json(recipe);
 });
 
